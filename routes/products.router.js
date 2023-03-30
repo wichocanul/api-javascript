@@ -1,34 +1,17 @@
 const express = require('express');
 
 
-const ProductsService = require('../services/product.service');
-
+// const ProductsService = require('../services/product.service');
 const router = express.Router();
-const service = new ProductsService();
+// const service = new ProductsService();
 
-router.get('/', async (req, resp) => {
-  const products = await service.find();
-  resp.json(products);
-})
+const { index, show, create } = require('../controllers/products');
 
-router.get('/:id', async (request, response, next) => {
-  try {
-    const { id } = request.params;
-    const product = await service.findOne(id);
-    response.json(product);
-  } catch (error) {
-    next(error);
-  }
-})
+router.get('/', index);
 
-router.post('/', async (req, resp) => {
-  const body = req.body;
-  const newProduct = await service.create(body);
-  resp.status(201).json({
-    message: 'created',
-    data: newProduct,
-  });
-})
+router.get('/:id', show);
+
+router.post('/', create);
 
 router.put('/:id', async (req, resp, next) => {
   try {
