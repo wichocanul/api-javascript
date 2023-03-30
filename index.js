@@ -21,3 +21,8 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log('Mi port' + port);
 });
+
+
+//crear un endpoint para iniciar sesion del login de sap
+//Obtener la cookie
+//mandar una respuesta(status) de que es correcto
